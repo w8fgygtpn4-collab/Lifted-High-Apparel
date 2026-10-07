@@ -12,7 +12,7 @@ export const collections = [
  {slug:'mountains',name:'MOUNTAINS',tagline:'Faith for the climb.',verse:'Matthew 17:20',description:'For the uphill days, the open trails, and the faith that carries us.',image:photo('photo-1464822759023-fed622ff2c3b')},
  {slug:'made-new',name:'MADE NEW',tagline:'A new day. A new creation.',verse:'2 Corinthians 5:17',description:'A reminder that your story is still unfolding. Made new. Made with purpose.',image:photo('photo-1470252649378-9c29740c9fa8')}
 ];
-export const products = [
+export let products = [
  {id:'rooted-heavyweight-tee',name:'Rooted Heavyweight Tee',price:34,collection:'rooted',type:'tee',color:'Moss',hex:'#626b4d',colors:['Moss','Bone','Washed black'],description:'A little reminder to grow deep. A relaxed, heavyweight cotton tee with a quiet, nature-inspired print.'},
  {id:'mountains-crewneck',name:'Mountains Crewneck',price:62,collection:'mountains',type:'sweatshirt',color:'Oat',hex:'#d9cdb6',colors:['Oat','Forest'],description:'Made for cool mornings and the long way home. An easygoing fleece crewneck inspired by a faith that stands firm.'},
  {id:'made-new-tee',name:'Made New Everyday Tee',price:32,collection:'made-new',type:'tee',color:'Faded clay',hex:'#bc8d73',colors:['Faded clay','Bone'],description:'New mercies. Everyday comfort. A soft cotton tee with a subtle sunrise graphic and an easy, lived-in fit.'},
@@ -22,5 +22,5 @@ export const products = [
  {id:'rooted-crewneck',name:'Be Still Crewneck',price:62,collection:'rooted',type:'sweatshirt',color:'Moss',hex:'#626b4d',colors:['Moss','Oat'],description:'Take a breath. A comfortable fleece layer with a simple reminder to be still.'},
  {id:'mountains-tee',name:'Stand Firm Tee',price:34,collection:'mountains',type:'tee',color:'Stone',hex:'#ada694',colors:['Stone','Forest'],description:'Built around a simple conviction. A relaxed cotton tee for everyday adventure.'}
 ];
-// Replace this adapter with a Shopify Storefront API integration when the catalog is ready.
-export const catalog = {list:()=>products,get:id=>products.find(p=>p.id===id),byCollection:slug=>products.filter(p=>p.collection===slug)};
+export function setCatalog(next) { products = next; }
+export const catalog = {list:()=>products,get:id=>products.find(p=>p.id===id),byCollection:slug=>products.filter(p=>p.memberships ? p.memberships.includes(slug) : p.collection===slug)};

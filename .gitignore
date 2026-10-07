@@ -4,3 +4,7 @@ test-results/
 playwright-report/
 
 lifted-high-preview.zip
+
+.env
+.env.local
+.env.*.local
