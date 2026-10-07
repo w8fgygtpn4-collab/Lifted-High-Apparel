@@ -1,0 +1,6 @@
+node_modules/
+dist/
+test-results/
+playwright-report/
+
+lifted-high-preview.zip
