@@ -48,9 +48,8 @@ const add=(p,size,color,qty,variant)=>{const key=variant?.id||`${p.id}-${size}-$
 useEffect(()=>{const names={'/':'Faith for the everyday adventure','/shop':'Shop the everyday essentials','/rooted':'Rooted collection','/mountains':'Mountains collection','/made-new':'Made New collection','/our-story':'Our story'};if(names[path])document.title=`${names[path]} — Lifted High Apparel`},[path]);let page;const collection=collections.find(c=>path===`/${c.slug}`);const product=path.startsWith('/products/')?catalog.get(path.split('/')[2]):null;
 if(path==='/')page=<Home/>;else if(collection)page=<Collection collection={collection}/>;else if(path==='/shop')page=<Shop/>;else if(path==='/our-story')page=<Story/>;else if(product)page=product.live?<LiveProduct product={product} add={add} money={money} ProductCard={ProductCard}/>:<Product product={product} add={add}/>;else page=<main className="empty-page"><h1>A little off the trail.</h1><p>This page doesn’t exist. Let’s head back.</p><a className="button dark" href="/">Back home <ArrowRight size={18}/></a></main>;
 return <>
-  {isHome && <HomeCover/>}
-  <header className="site-header" id="site-navigation">
-    <a className="wordmark" href="/">LIFTED HIGH<span>APPAREL & LIFESTYLE</span></a>
+  <header className={isHome ? "site-header editorial-header" : "site-header"} id="site-navigation">
+    <a className="wordmark" href="/">{isHome && <i className="editorial-mark" aria-hidden="true">✳</i>}LIFTED HIGH<span>APPAREL & LIFESTYLE</span></a>
     <nav aria-label="Main navigation">
       {navigationLinks.map(([label,url])=>(
         <a href={url} key={url} aria-current={path===url?'page':undefined} className={path===url?'active':''}>{label}</a>
@@ -66,6 +65,7 @@ return <>
       </button>
     </div>
   </header>
+  {isHome && <HomeCover/>}
   {page}
   <Footer/>
 {mobile&&<div className={isHome ? "overlay home-menu-overlay" : "overlay"} onClick={()=>setMobile(false)}><section className="drawer" role="dialog" aria-modal="true" aria-label="Navigation" onClick={e=>e.stopPropagation()}><div className="drawer-head">LIFTED HIGH<button autoFocus aria-label="Close navigation" onClick={()=>setMobile(false)}><X/></button></div>{navigationLinks.map(([label,url])=><a className="mobile-link" href={url} key={url} aria-current={path===url?"page":undefined}>{label}<ArrowUpRight/></a>)}</section></div>}
@@ -73,14 +73,12 @@ return <>
 {cartOpen&&<div className="overlay" onClick={()=>setCartOpen(false)}><section className="drawer cart" role="dialog" aria-modal="true" aria-label="Shopping bag" onClick={e=>e.stopPropagation()}><div className="drawer-head">Your bag ({count})<button autoFocus aria-label="Close shopping bag" onClick={()=>setCartOpen(false)}><X/></button></div>{cart.length? <><div className="cart-items">{cart.map(i=>{const p=catalog.get(i.id);return <div className="cart-item" key={i.key}><Garment product={p}/><div><a href={`/products/${p.id}`}>{p.name}</a><p>{i.color} · {i.size}</p><div className="quantity"><button aria-label={`Decrease ${p.name} quantity`} onClick={()=>change(i.key,-1)}><Minus size={14}/></button><span>{i.qty}</span><button aria-label={`Increase ${p.name} quantity`} onClick={()=>change(i.key,1)}><Plus size={14}/></button></div></div><span>{money((i.unitPrice??p.price)*i.qty)}</span></div>})}</div><div className="cart-bottom"><div><strong>Subtotal</strong><strong>{money(cart.reduce((s,i)=>s+(i.unitPrice??catalog.get(i.id).price)*i.qty,0))}</strong></div><p>{shopifyConfigured?'Shipping and taxes calculated at Shopify checkout.':'This is a preview catalog. Checkout will be available at launch.'}</p>{checkoutError&&<p role="alert">{checkoutError}</p>}{shopifyConfigured?<button className="button dark" disabled={checkingOut} onClick={checkout}>{checkingOut?'Opening checkout…':'SECURE CHECKOUT'} <ArrowRight size={18}/></button>:<button className="button dark" onClick={()=>setCartOpen(false)}>Keep exploring <ArrowRight size={18}/></button>}</div></>:<div className="empty-bag"><ShoppingBag size={36}/><h2>Room for a little adventure.</h2><p>Your bag is empty.</p><a className="button dark" href="/shop">Explore the pieces <ArrowRight size={18}/></a></div>}</section></div>}</>}
 function HomeCover() {
   return (
-    <section className="home-cover" aria-labelledby="home-brand-title">
-      <img src={brandPhotos.hero.src} alt="" fetchPriority="high"/>
-      <div className="home-brand">
-        <h1 id="home-brand-title">Lifted High<span>Apparel</span></h1>
+    <section className="editorial-cover" aria-labelledby="home-brand-title">
+      <img src="/images/home-editorial.webp" alt="A hiker in an olive hoodie overlooking a mountain valley" fetchPriority="high"/>
+      <div className="editorial-copy">
+        <h1 id="home-brand-title">Rooted in faith.<br/>Made for life.</h1>
+        <a className="button cream" href="#home-collections">Explore collections</a>
       </div>
-      <a className="home-scroll" href="#site-navigation">
-        <span>Explore</span><ChevronDown size={22} aria-hidden="true"/>
-      </a>
     </section>
   );
 }
