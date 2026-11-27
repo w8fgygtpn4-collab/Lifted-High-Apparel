@@ -62,3 +62,133 @@
     scroll-behavior: auto !important;
   }
 }
+
+.home-cover {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  isolation: isolate;
+  color: #f7f5e9;
+  background: #17241b;
+}
+
+.home-cover > img,
+.home-cover::after {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.home-cover > img { object-fit: cover; object-position: 58% center }
+.home-cover::after {
+  content: "";
+  background: linear-gradient(0deg, #101a15a6, transparent 32%), #101a1559;
+}
+
+.home-brand { text-align: center; padding: 0 52px }
+.home-brand h1 {
+  margin: 0;
+  font: 800 clamp(3rem, 10vw, 10rem)/.94 Manrope, sans-serif;
+  letter-spacing: -.075em;
+  text-transform: uppercase;
+}
+.home-brand h1 span {
+  display: block;
+  margin-top: 22px;
+  font: 600 clamp(.9rem, 1.4vw, 1.2rem)/1 'DM Sans', sans-serif;
+  letter-spacing: .48em;
+  text-indent: .48em;
+}
+.home-scroll {
+  position: absolute;
+  bottom: max(25px, env(safe-area-inset-bottom));
+  left: 50%;
+  translate: -50% 0;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  font-size: 14px;
+}
+.home-scroll:focus-visible, .home-rail button:focus-visible { outline: 2px solid #f7f5e9; outline-offset: -3px }
+.home-rail {
+  position: fixed;
+  z-index: 20;
+  top: 50%;
+  left: clamp(8px, 2vw, 30px);
+  translate: 0 -50%;
+  display: grid;
+  padding: 4px;
+  border: 1px solid #f5f2e341;
+  border-radius: 4px;
+  color: #f7f5e9;
+  background: #17241bf2;
+}
+.home-rail button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  gap: 3px;
+  min-width: 44px;
+  min-height: 48px;
+  padding: 5px;
+  color: inherit;
+}
+.home-rail button:hover { background: #ffffff20 }
+.home-rail button > span { font-size: 11px }
+.home-rail .home-rail-count {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  min-width: 16px;
+  border-radius: 12px;
+  background: #f7f5e9;
+  color: #17241b;
+}
+.home-menu-overlay { justify-content: flex-start }
+
+.home-collections {
+  padding: clamp(52px, 8vw, 118px) max(5%, 74px);
+}
+.home-collections-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: center;
+  margin-bottom: 26px;
+}
+.home-collections-heading h2 {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 3.7rem);
+  letter-spacing: -.05em;
+}
+.home-collections-heading .button { white-space: nowrap }
+.home-collections .tile-content h3 {
+  margin: 0 0 10px;
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
+  letter-spacing: -.04em;
+}
+.home-collections .tile-content .text-link { text-transform: uppercase }
+
+@media (max-width: 650px) {
+  .home-rail { left: 6px; top: auto; bottom: max(16px, env(safe-area-inset-bottom)); translate: none }
+  .home-collections { padding-inline: 20px }
+  .home-collections-heading .button { padding: 12px 15px }
+  .home-brand h1 { font-size: clamp(3rem, 11vw, 4.5rem) }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-brand h1 { animation: lift-in 760ms cubic-bezier(.2,.65,.3,1) backwards }
+  .home-scroll { animation: lift-in 550ms ease-out 250ms backwards }
+  .home-scroll svg { transition: transform 220ms ease-out }
+  .home-scroll:is(:hover,:focus-visible) svg { transform: translateY(4px) }
+  .home-menu-overlay > .drawer { animation-name: home-menu-in }
+  .home-collections .collection-tile:nth-child(2) { animation-delay: 70ms }
+  .home-collections .collection-tile:nth-child(3) { animation-delay: 140ms }
+}
+
+@keyframes home-menu-in { from { translate: -100% 0 } }
