@@ -228,9 +228,7 @@
 .story-intro > p:last-child { font-size: clamp(1rem, 1.6vw, 1.2rem); line-height: 1.65; margin: 0 }
 .story-rack {
   display: block;
-  width: min(100%, 1440px);
-  max-height: 70svh;
-  object-fit: cover;
-  margin-inline: auto;
+  width: 100%;
+  height: auto;
 }
 .story-shop { padding: 44px 24px 66px; text-align: center }

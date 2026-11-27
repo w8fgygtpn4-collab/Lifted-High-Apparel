@@ -121,7 +121,7 @@ function Story() {
         <h1 id="story-title">Rooted in faith.<br/>Made for life.</h1>
         <p>Lifted High Apparel exists to create clothing that reflects faith through intentional design. Inspired by creation, grounded in Scripture, and made for everyday life, our apparel serves as a reminder of who we are and who we live for.</p>
       </section>
-      <img className="story-rack" src="/images/lifted-high-rack.webp" alt="Earth-tone hoodies and tees hanging on a wooden clothing rack"/>
+      <img className="story-rack" src="/images/lifted-high-hanging-collection.webp" alt="Lifted High graphic tees and hoodies hanging from a single wooden rail"/>
       <div className="story-shop" data-scroll-motion>
         <a className="button dark" href="/shop">Shop the collections</a>
       </div>
