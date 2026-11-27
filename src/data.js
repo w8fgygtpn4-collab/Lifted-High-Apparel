@@ -1,16 +1,31 @@
-const images = {
- 'photo-1472396961693-142e6e269027':'forest',
- 'photo-1448375240586-882707db888b':'forest',
- 'photo-1464822759023-fed622ff2c3b':'mountains',
- 'photo-1470252649378-9c29740c9fa8':'valley',
- 'photo-1470770841072-f978cf4d019e':'lake',
- 'photo-1441974231531-c6227db76b6e':'wilderness'
+export const brandPhotos = {
+  hero: { src: '/images/dawn-overlook.webp', alt: 'A hiker overlooking an evergreen valley at dawn' },
+  storyPreview: { src: '/images/lakeside-pause.webp', alt: 'A backpacker resting on a boulder beside a quiet lake' },
+  story: { src: '/images/woodland-walk.webp', alt: 'Two hikers walking through sunlit woods' },
+  gallery: [
+    { src: '/images/valley-dawn.webp', alt: 'Morning mist over a valley of evergreens' },
+    { src: '/images/camp-mug.webp', alt: 'Hands pouring a warm drink into a camping mug' },
+    { src: '/images/fern-detail.webp', alt: 'Dew on green ferns in the shade' },
+    { src: '/images/ridge-walk.webp', alt: 'Two friends walking along an open ridgeline' },
+  ],
 };
-export const photo = id => `/images/${images[id] || 'wilderness'}.webp`;
+
 export const collections = [
- {slug:'rooted',name:'ROOTED',tagline:'Stand firm. Grow deep.',verse:'Colossians 2:7',description:'Grounded in Christ. Growing into who we’re called to be.',image:photo('photo-1448375240586-882707db888b')},
- {slug:'mountains',name:'MOUNTAINS',tagline:'Faith for the climb.',verse:'Matthew 17:20',description:'For the uphill days, the open trails, and the faith that carries us.',image:photo('photo-1464822759023-fed622ff2c3b')},
- {slug:'made-new',name:'MADE NEW',tagline:'A new day. A new creation.',verse:'2 Corinthians 5:17',description:'A reminder that your story is still unfolding. Made new. Made with purpose.',image:photo('photo-1470252649378-9c29740c9fa8')}
+  {
+    slug: 'rooted', name: 'ROOTED', verse: 'Colossians 2:7',
+    description: 'Everyday pieces that remind you to stay grounded in Christ as you grow.',
+    image: '/images/cedar-roots.webp', imageAlt: 'Exposed cedar roots and ferns on the forest floor',
+  },
+  {
+    slug: 'mountains', name: 'MOUNTAINS', verse: 'Matthew 17:20',
+    description: 'Outdoor-inspired pieces for the open trail and the days that ask you to trust God uphill.',
+    image: '/images/alpine-climb.webp', imageAlt: 'A hiker ascending a rocky ridge below an alpine peak',
+  },
+  {
+    slug: 'made-new', name: 'MADE NEW', verse: '2 Corinthians 5:17',
+    description: 'Pieces inspired by new life in Christ and the freedom to grow into who God made you to be.',
+    image: '/images/morning-meadow.webp', imageAlt: 'Warm morning light spreading over a misty meadow',
+  },
 ];
 export let products = [
  {id:'rooted-heavyweight-tee',name:'Rooted Heavyweight Tee',price:34,collection:'rooted',type:'tee',color:'Moss',hex:'#626b4d',colors:['Moss','Bone','Washed black'],description:'A little reminder to grow deep. A relaxed, heavyweight cotton tee with a quiet, nature-inspired print.'},
